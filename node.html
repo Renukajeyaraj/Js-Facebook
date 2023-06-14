@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .container{
+            /* width:80%; */
+            margin:0 auto;
+            /* background-color:palevioletred;
+            border:5px solid black; */
+            /* display: flex; */
+            /* gap:230px; */
+            margin-left: 530px;
+             }
+             h3{
+                font-size:45px;
+                background-color:rgba(35, 35, 250, 0.824);
+                text-align: center;
+                width:400px;
+                margin-left: 530px;
+                
+             }
+             img{
+                max-width: 23%;
+                margin-left: 80px;
+             }
+             label{
+                font-size: 35px;
+                font-style: italic;
+                padding: 25px;
+             }
+             .left{
+                margin-left: 50px;
+             }
+             button{
+                margin-left: 80px;
+                padding: 8px 20px;
+                font-size: 20px;
+                background-color: darkcyan;
+                border-radius:15%;
+             }
+             .icon i{
+                font-size: 25px;
+                margin:10px;
+             }
+             .icon{
+                margin-left: 70px;
+             }
+             textarea{
+                border:3px solid black;  
+                      }
+          
+    </style>
+    </head>
+    <body>
+        <h3>Facebook</h3>
+        <div class="container">
+            <div class="left">
+                <form id="form">
+                    <label for="" class="your">Write Your post</label><br><br>
+                    <textarea name="" id="input" cols="35" rows="3"></textarea><br><br>
+                    <button type="submit">Post</button><br><br>
+
+                </form>
+
+            </div>
+       <div class="right">
+                <div id="post">
+
+                </div>
+            </div>
+        </div>
+        <script>
+            let form=document.getElementById('form');
+            let input=document.getElementById('input');
+            let post=document.getElementById('post');
+            form.addEventListener("submit",function(e){
+                e.preventDefault();
+                readpost();
+            })
+            let data={};
+            function readpost(){
+                data['text']=input.value;
+                console.log(data)
+                createpost();
+            }
+            function createpost(){
+                post.innerHTML+=`<div>
+                    <p>${data.text}</p>
+                    <img src="pa.jpg"/>
+                    <div class="icon"><i onclick="editpost(this)"class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <i onclick="deletepost(this)" class="fa fa-trash-o" aria-hidden="true"></i>
+                        <i onclick="likepost(this)"class="fa fa-thumbs-o-up" aria-hidden="true"></i><input type="text" value="" size="2" id="like">
+                    </div>
+                    </div>`
+                    input.value='';
+                  
+            }
+            function editpost(e){
+                console.log(e);
+                input.value=e.parentElement.previousElementSibling.innerHTML;
+                e.parentElement.parentElement.remove();
+            }
+            function deletepost(d){
+                console.log(d);
+               d.parentElement.parentElement.remove();
+            }
+            function likepost(){
+               let count = Number (document.querySelector("#like").value);
+               count+=1;
+               document.querySelector("#like").value = count;
+            //    linkpost.style.color="red";
+            }
+
+        </script>
+    </body>
+</html>
